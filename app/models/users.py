@@ -13,7 +13,10 @@ class User(BASE):
     password: Mapped[str] = mapped_column("password", String(250), nullable=False)
     created_at: Mapped[datetime] = mapped_column("created_at", DateTime, default=datetime.now())
 
-    theme_id: Mapped[int] = mapped_column("theme_id", ForeignKey("userstheme.id"))
+    wallet_id: Mapped[uuid.UUID] = mapped_column("wallet_id", ForeignKey("wallets.id"), nullable=True)
+    theme_id: Mapped[int] = mapped_column("theme_id", ForeignKey("userstheme.id"), nullable=True)
+
+    wallet: Mapped["Wallet"] = relationship(back_populates="owner")
     theme: Mapped["UserTheme"] = relationship(back_populates="user", cascade="all, delete-orphan")
 
 class UserTheme(BASE):
