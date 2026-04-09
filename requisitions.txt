@@ -2,4 +2,5 @@ fastapi
 sqlalchemy
 asyncpg
 uvicorn
-pydotenv
+passlib[bcrypt]
+python-dotenv
